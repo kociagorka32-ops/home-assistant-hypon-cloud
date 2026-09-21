@@ -1,12 +1,10 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
-RUN apk add --no-cache mosquitto-clients
+RUN apk add --no-cache mosquitto-clients jq curl
 
-# Copy data for add-on
 COPY run.sh /
 COPY scripts/ /scripts/
 
-RUN chmod a+x /run.sh
+RUN chmod a+x /run.sh /scripts/*.sh
 
 CMD [ "/run.sh" ]
